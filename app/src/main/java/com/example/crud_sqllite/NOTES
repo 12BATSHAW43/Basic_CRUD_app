@@ -1,0 +1,22 @@
+SQLiteDatabase db =openOrCreateDatabase(database name,mode,cursorfactory);
+
+steps:
+
+1. First i created java files for accessing SQLLiteOpenHelper (helper class)  ---named as DatabaseHelper
+2. In DatabaseHelper file we extend the the current class file with SQLOpenHelper and implement the methods
+    We pass database version, table name , context and factory in its constructor
+    In onCreate() we execute create query which will be executed when app is created and in OnUpgrade method we wrote DROP table if exists query
+
+3. Now we create a new java java named DatabaseManager, inside which we declare reference variable of DatabaseHelper , context and SqlLiteDatabase
+
+    Now we create a constructor to set context and then we open the database overriding DataManager open()
+    In DatabaseManager open() we call the DBhelper object and pass context in it using new keyboard and
+    we use reference variable of dbhelper to call getWritableDatabase();
+
+    Now in the same file we create functions to execute SQL FUNCTIONS like insert update delete etc;
+    For passing the values into database we use COntentValues is used to store set of data using its put() method
+    and then we use SQLLiteDatabase object to call insert(table name, null column hack , contentvalues) for inserting the data
+
+    In short we use DatabaseManager file for writing code to provide functionality to perform CRUD OPERATIONS
+
+4. For  fetching data from table itself we use CURSOR to point to the current row and fetch current row data , and using it we can simultaneously detch the data from database table
